@@ -7,7 +7,8 @@ defmodule PhoenixOauth2Provider.View do
   defmacro __using__(_opts) do
     quote do
       import unquote(__MODULE__)
-      import Phoenix.HTML.{Form, Link, Tag}
+      # import Phoenix.HTML.{Form, Link, Tag}
+      import Phoenix.HTML.Form
 
       alias PhoenixOauth2Provider.Router.Helpers, as: Routes
 
@@ -40,24 +41,25 @@ defmodule PhoenixOauth2Provider.View do
     end
   end
 
-  def error_tag(form, field) do
-    form.errors
-    |> Keyword.get_values(field)
-    |> Enum.map(&error_tag/1)
-  end
-
-  def error_tag(error) do
-    Tag.content_tag(:span, translate_error(error), class: "help-block")
-  end
-
-  defp translate_error({msg, opts}) do
-    Enum.reduce(opts, msg, fn {key, value}, msg ->
-      token = "%{#{key}}"
-
-      case String.contains?(msg, token) do
-        true -> String.replace(msg, token, to_string(value), global: false)
-        false -> msg
-      end
-    end)
-  end
+  # def error_tag(form, field) do
+  #   form.errors
+  #   |> Keyword.get_values(field)
+  #   |> Enum.map(&error_tag/1)
+  # end
+  #
+  # def error_tag(error) do
+  #   # Tag.content_tag(:span, translate_error(error), class: "help-block")
+  #       # <span class="help-block">{error}</span>
+  # end
+  #
+  # defp translate_error({msg, opts}) do
+  #   Enum.reduce(opts, msg, fn {key, value}, msg ->
+  #     token = "%{#{key}}"
+  #
+  #     case String.contains?(msg, token) do
+  #       true -> String.replace(msg, token, to_string(value), global: false)
+  #       false -> msg
+  #     end
+  #   end)
+  # end
 end

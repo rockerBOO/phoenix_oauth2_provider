@@ -8,27 +8,22 @@ defmodule PhoenixOauth2Provider.ApplicationView do
 
     <%%= render "form.html", Map.put(assigns, :action, Routes.oauth_application_path(@conn, :update, @changeset.data)) %>
 
-    <span><%%= link "Back", to: Routes.oauth_application_path(@conn, :index) %></span>
+    <span><.link href={Routes.oauth_application_path(@conn, :index)}></.link></span>
     """
   )
 
   template(
     "form.html",
     """
-    <%%= form_for @changeset, @action, fn f -> %>
+    <.form for={@form}>
     <%%= if @changeset.action do %>
         <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
         </div>
     <%% end %>
 
-      <%%= label f, :name %>
-      <%%= text_input f, :name %>
-      <%%= error_tag f, :name %>
-
-      <%%= label f, :redirect_uri %>
-      <%%= textarea f, :redirect_uri %>
-      <%%= error_tag f, :redirect_uri %>
+        <.input field={@form[:name]}  label="Name" required />
+        <.input field={@form[:redirect_uri]}  label="Redirect URI" required />
       <span class="help-block">Use one line per URI</span>
         <%%= if is_nil(@native_redirect_uri) do %>
             <span class="help-block">
@@ -36,17 +31,15 @@ defmodule PhoenixOauth2Provider.ApplicationView do
             </span>
         <%% end %>
 
-      <%%= label f, :scopes %>
-      <%%= text_input f, :scopes %>
-      <%%= error_tag f, :scopes %>
+        <.input field={@form[:scopes]}  label="Scopes" required />
       <span class="help-block">
         Separate scopes with spaces. Leave blank to use the default scopes.
       </span>
 
       <div>
-        <%%= submit "Save" %>
+        <input type="submit" "Save">
       </div>
-    <%% end %>
+    <.form>
     """
   )
 
@@ -66,18 +59,18 @@ defmodule PhoenixOauth2Provider.ApplicationView do
       <tbody>
         <%%= for application <- @applications do %>
             <tr>
-              <td><%%= link application.name, to: Routes.oauth_application_path(@conn, :show, application) %></td>
+              <td><.link href={Routes.oauth_application_path(@conn, :show, application)}><%%= application.name %></.link></td>
               <td><%%= application.redirect_uri %></td>
               <td>
-                <%%= link "Edit", to: Routes.oauth_application_path(@conn, :edit, application) %>
-                <%%= link "Delete", to: Routes.oauth_application_path(@conn, :delete, application), method: :delete, data: [confirm: "Are you sure?"] %>
+                <.link href={Routes.oauth_application_path(@conn, :edit, application)}>Edit</.link>
+                <.link href={Routes.oauth_application_path(@conn, :delete, application)}>Delete</.link>
               </td>
             </tr>
         <%% end %>
       </tbody>
     </table>
 
-    <span><%%= link "New Application", to: Routes.oauth_application_path(@conn, :new) %></span>
+    <span><.link href={Routes.oauth_application_path(@conn, :new)}>New Application</.link></span>
     """
   )
 
@@ -88,7 +81,7 @@ defmodule PhoenixOauth2Provider.ApplicationView do
 
     <%%= render "form.html", Map.put(assigns, :action, Routes.oauth_application_path(@conn, :create)) %>
 
-    <span><%%= link "Back", to: Routes.oauth_application_path(@conn, :index) %></span>
+    <span><.link href={Routes.oauth_application_path(@conn, :index)}>Back<.link></span>
     """
   )
 
@@ -122,7 +115,7 @@ defmodule PhoenixOauth2Provider.ApplicationView do
                       <code><%%= redirect_uri %></code>
                     </td>
                     <td>
-                      <%%= link "Authorize", to: Routes.oauth_authorization_path(@conn, :new, client_id: @application.uid, redirect_uri: redirect_uri, response_type: "code", scope: @application.scopes), target: '_blank' %>
+                      <.link href={Routes.oauth_authorization_path(@conn, :new, client_id: @application.uid, redirect_uri: redirect_uri, response_type: "code", scope: @application.scopes)} target="_blank">New?</.link>
                     </td>
                   </tr>
           <%% end %>
@@ -131,7 +124,7 @@ defmodule PhoenixOauth2Provider.ApplicationView do
     </li>
   </ul>
 
-  <span><%%= link "Edit", to: Routes.oauth_application_path(@conn, :edit, @application) %></span>
-  <span><%%= link "Back", to: Routes.oauth_application_path(@conn, :index) %></span>
+  <span><.link href={Routes.oauth_application_path(@conn, :edit, @application)}>Edit</.link></span>
+  <span><.link href={Routes.oauth_application_path(@conn, :index)}>Index</.link></span>
   """)
 end

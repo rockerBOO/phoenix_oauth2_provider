@@ -1,3 +1,3 @@
 defmodule DummyWeb.LayoutView do
-  use DummyWeb, :view
+  use DummyWeb, :controller
 end

@@ -1,3 +1,3 @@
 defmodule DummyWeb.PhoenixOauth2Provider.ApplicationView do
-  use DummyWeb, :view
+  use DummyWeb, :controller
 end

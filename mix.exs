@@ -7,10 +7,10 @@ defmodule PhoenixOauth2Provider.Mixfile do
     [
       app: :phoenix_oauth2_provider,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      compilers: [] ++ Mix.compilers(),
+      # compilers: [] ++ Mix.compilers(),
       deps: deps(),
 
       # Hex
@@ -35,14 +35,21 @@ defmodule PhoenixOauth2Provider.Mixfile do
 
   defp deps do
     [
-      {:ex_oauth2_provider, "~> 0.5.1"},
-      {:phoenix, "~> 1.5"},
-      {:phoenix_html, "~> 3.0.0"},
-      {:phoenix_ecto, "~> 4.3.0", only: [:test, :dev]},
+      {:ex_oauth2_provider, "~> 0.5"},
+      # {:phoenix, "~> 1.7"},
+
+      {:phoenix, "~> 1.7.14"},
+      {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
+      # {:phoenix_ecto, "~> 4.5"},
+      # {:phoenix_html, "~> 4.1"},
+      {:phoenix_html, "~> 4.0"},
+      # {:phoenix_ecto, "~> 4.3", only: [:test, :dev]},
+      {:phoenix_ecto, "~> 4.5", only: [:test, :dev]},
+      # {:phoenix_ecto, "~> 4.3.0", only: [:test, :dev]},
       {:credo, "~> 1.6.0", only: [:dev, :test]},
-      {:jason, "~> 1.0", only: [:dev, :test]},
+      # {:jason, "~> 1.0", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:ecto_sql, "~> 3.12.0", only: :test},
+      {:ecto_sql, "~> 3.10", only: :test},
       {:plug_cowboy, "~> 2.6", only: :test},
       {:postgrex, "~> 0.19.1", only: :test}
     ]
