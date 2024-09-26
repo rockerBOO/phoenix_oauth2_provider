@@ -10,7 +10,7 @@ defmodule PhoenixOauth2Provider.Mixfile do
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      compilers: [:phoenix] ++ Mix.compilers(),
+      compilers: [] ++ Mix.compilers(),
       deps: deps(),
 
       # Hex
@@ -42,9 +42,9 @@ defmodule PhoenixOauth2Provider.Mixfile do
       {:credo, "~> 1.6.0", only: [:dev, :test]},
       {:jason, "~> 1.0", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:ecto_sql, "~> 3.1.0", only: :test},
+      {:ecto_sql, "~> 3.12.0", only: :test},
       {:plug_cowboy, "~> 2.6", only: :test},
-      {:postgrex, "~> 0.15.0", only: :test}
+      {:postgrex, "~> 0.19.1", only: :test}
     ]
   end
 
